@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" >
+
+	<ui:composition template="/pages/templates/layout.xhtml">
+	   	<ui:param name="activeSubmenu" value="contato"/>
+    	<ui:param name="activeMenu" value="agenda"/>
+    	
+	   	<f:metadata>
+        	<f:viewAction action="#{pesquisarContatoBB.preparar()}" />
+    	</f:metadata>
+    	
+    	<ui:define name="breadcrumb">		
+		   <li>Contatos/Pesquisar </li>          
+		</ui:define>
+		
+		<ui:define name="body">	
+			<div class="box">
+				<div class="box-header with-border">
+					<div class="col-xs-6 col-sm-3">
+						<h3 class="box-title">
+							<div >
+								Pesquisar Contatos
+							</div>
+						</h3>
+					</div>		
+				</div>		
+				<h:form id="contatoPesquisarForm">
+					<p:focus context="contatoPesquisarForm"/>
+				
+					<div class="box-body row">						
+						<div class="form-group col-md-6">
+							<p:outputLabel for="nome" value="Nome do Contato" />
+							<p:inputText value="#{pesquisarContatoBB.nome}"
+								id="nome"  maxlength="150" styleClass="form-control">
+							</p:inputText>
+						</div>						
+					</div>
+					
+					<!-- Botões de ação -->
+					<div class="box-footer align-left">
+						<p:commandButton 
+							value="Buscar Contato" 
+							title="Buscar Contato"
+							styleClass="btn btn-primary"
+							actionListener="#{pesquisarContatoBB.buscar()}" 
+							ajax="true"
+							update="contatoPesquisarForm gridForm divMessage"
+							icon="fa fa-search">
+						</p:commandButton>
+						
+						<p:spacer width="10"/>
+						
+						<p:button 
+							value="Limpar Busca" 
+							title="Limpar Busca" 
+							styleClass="btn btn-primary" 
+							type="reset" >
+						</p:button>
+						
+						<p:spacer width="10"/>
+						
+						<p:button 
+							value="Incluir Contato" 
+							title="Incluir Contato" 
+							href="/pages/contato/manter_contato.jsf" 
+							styleClass="btn btn-success"
+							icon="fa fa-plus">
+						</p:button>
+					</div>
+				</h:form>
+			</div>
+			
+			<!-- Lista -->
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<span class="box-title">Lista de Contatos</span>
+					<div class="box-tools pull-right">
+						<button class="btn btn-box-tool" data-widget="collapse">
+							<i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<h:form id="gridForm">
+	    				<p:dataTable var="contato" 
+				    		value="#{pesquisarContatoBB.listaDeContatos}" 
+				    		paginator="false" 
+				    		reflow="true"
+				    		sortBy="#{contato.nome}"  
+	                		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                		rowsPerPageTemplate="20,40,60"							
+	                		id="gdContatos" 
+	                		lazy="false"	
+	                		paginatorPosition="bottom"	                		
+	                		emptyMessage="Nenhum contato cadastrado" >              			
+	                					 
+			        		<p:column headerText="Nome" filterable="true" sortBy="#{contato.nome}" >
+			            		<h:outputText value="#{contato.nome}" />
+			        		</p:column>
+						    
+						    <p:column headerText="Email" filterable="true" sortBy="#{contato.email}" >
+			            		<h:outputText value="#{contato.email}" />
+			        		</p:column> 
+			        		
+			        		<p:column headerText="Data Nascimento" filterable="true" >
+			            		<h:outputText value="#{contato.dtNascimento}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />			            		
+			            		</h:outputText>			            		
+			        		</p:column> 		
+			     
+						    <p:column headerText="Ação" styleClass="align-center" priority="3" width="80">
+								<p:commandButton 
+									id="cmdAlterarContato" 
+									icon="ui-icon-pencil" 									 	 
+								 	title="Alterar Contato"							 		
+							 		ajax="false"
+								 	action="#{pesquisarContatoBB.redirecionarParaAlteracaoContato(contato.id)}">
+								</p:commandButton>
+								
+								<p:commandButton 
+									id="cmdRemoverContato" 
+									icon="ui-icon-trash"									 	 
+									title="Remover Contato"	
+								 	ajax="true"								 		
+								 	actionListener="#{pesquisarContatoBB.removerContato(contato.id)}"
+							 		update=":gridForm :contatoPesquisarForm">		
+									 	
+									<p:confirm header="Confirmação" message="Tem certeza que deseja continuar?" icon="ui-icon-alert" />	 
+								</p:commandButton>
+								
+								<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							    </p:confirmDialog>						    	
+						    </p:column>						     
+						     
+							<f:facet name="footer">  
+			    	   			#{pesquisarContatoBB.totalDeContatosPesquisa} contato(s)  
+							</f:facet>	
+						</p:dataTable>		
+					</h:form> 
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</ui:component>

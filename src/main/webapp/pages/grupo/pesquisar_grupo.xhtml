@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" >
+
+	<ui:composition template="/pages/templates/layout.xhtml">
+	   	<ui:param name="activeSubmenu" value="grupo"/>
+    	<ui:param name="activeMenu" value="agenda"/>
+    	
+	   	<f:metadata>
+        	<f:viewAction action="#{pesquisarGrupoBB.preparar()}" />
+    	</f:metadata>
+    	
+    	<ui:define name="breadcrumb">		
+		   <li>Grupos/Pesquisar </li>          
+		</ui:define>
+		
+		<ui:define name="body">	
+			<div class="box">
+				<div class="box-header with-border">
+					<div class="col-xs-6 col-sm-3">
+						<h3 class="box-title">
+							<div >
+								Pesquisar Grupos
+							</div>
+						</h3>
+					</div>		
+				</div>		
+				<h:form id="grupoPesquisaForm">
+					<p:focus context="grupoPesquisaForm"/>
+				
+					<div class="box-body row">						
+						<div class="form-group col-md-6">
+							<p:outputLabel for="nome" value="Nome do Grupo" />
+							<p:inputText value="#{pesquisarGrupoBB.nome}"
+								id="nome"  maxlength="150" styleClass="form-control">
+							</p:inputText>
+						</div>						
+					</div>
+					
+					<!-- Botões de ação -->
+					<div class="box-footer align-left">
+						<p:commandButton 
+							value="Buscar Grupo" 
+							title="Buscar Grupo"
+							styleClass="btn btn-primary"
+							actionListener="#{pesquisarGrupoBB.buscar()}" 
+							ajax="true"
+							update="grupoPesquisaForm gridForm divMessage"
+							icon="fa fa-search">
+						</p:commandButton>
+						
+						<p:spacer width="10"/>
+						
+						<p:button 
+							value="Limpar Busca" 
+							title="Limpar Busca" 
+							styleClass="btn btn-primary" 
+							type="reset" >
+						</p:button>
+						
+						<p:spacer width="10"/>
+						
+						<p:button 
+							value="Incluir Grupo" 
+							title="Incluir Grupo" 
+							href="/pages/grupo/manter_grupo.jsf" 
+							styleClass="btn btn-success"
+							icon="fa fa-plus">
+						</p:button>
+					</div>
+				</h:form>
+			</div>
+			
+			<!-- Lista -->
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<span class="box-title">Lista de Grupos</span>
+					<div class="box-tools pull-right">
+						<button class="btn btn-box-tool" data-widget="collapse">
+							<i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<h:form id="gridForm">
+	    				<p:dataTable var="grupo" 
+				    		value="#{pesquisarGrupoBB.listaPesquisa}" 
+				    		paginator="false" 
+				    		reflow="true"
+				    		sortBy="#{grupo.nome}"  
+	                		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                		rowsPerPageTemplate="20,40,60"							
+	                		id="gdGrupos" 
+	                		lazy="false"	
+	                		paginatorPosition="bottom"	                		
+	                		emptyMessage="Nenhum grupo cadastrado" >              			
+	                					 
+			        		<p:column headerText="Nome" filterable="true" sortBy="#{grupo.nome}" >
+			            		<h:outputText value="#{grupo.nome}" />
+			        		</p:column>
+			        		
+			        		<p:column headerText="Qtd. de Contatos" filterable="true" sortBy="#{grupo.qtdContatos}" >
+			            		<h:outputText value="#{grupo.qtdContatos}" />
+			        		</p:column>
+			     
+						    <p:column headerText="Ação" styleClass="align-center" priority="3" width="80">
+								<p:commandButton 
+									id="cmdAlterarGrupo" 
+									icon="ui-icon-pencil" 									 	 
+								 	title="Alterar Grupo"							 		
+							 		ajax="false"
+								 	action="#{pesquisarGrupoBB.redirecionarParaAlteracao(grupo.id)}">
+								</p:commandButton>
+								
+								<p:commandButton 
+									id="cmdRemoverGrupo" 
+									icon="ui-icon-trash"									 	 
+									title="Remover Grupo"	
+								 	ajax="true"								 		
+								 	actionListener="#{pesquisarGrupoBB.removerGrupo(grupo.id)}"
+							 		update=":gridForm :grupoPesquisaForm">		
+									 	
+									<p:confirm header="Confirmação" message="Tem certeza que deseja continuar?" icon="ui-icon-alert" />	 
+								</p:commandButton>
+								
+								<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							    </p:confirmDialog>						    	
+						    </p:column>						     
+						     
+							<f:facet name="footer">  
+			    	   			#{pesquisarGrupoBB.totalPesquisa} grupo(s)  
+							</f:facet>	
+						</p:dataTable>		
+					</h:form> 
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</ui:component>

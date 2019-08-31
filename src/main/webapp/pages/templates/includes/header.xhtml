@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ds="http://deltaspike.apache.org/jsf"
+	xmlns:pe="http://primefaces.org/ui/extensions" >
+
+	<header class="main-header">
+         <!-- Logo -->
+         <a href="#{request.contextPath}/pages/inicio.jsf" class="logo">
+             <span class="logo-mini">
+             	<img src="#{request.contextPath}/resources/images/jsf_javaee.png" height="45" width="37"/>
+             </span>
+             <span class="logo-lg">
+             	<img src="#{request.contextPath}/resources/images/jsf_javaee.png" height="45" width="37"/>Nome do Sistema
+             </span>
+         </a>
+         <!-- Header Navbar -->
+         <nav class="navbar navbar-static-top" role="navigation">                    
+             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                 <span class="sr-only"></span>
+             </a>
+             <div class="navbar-custom-menu">
+                 <ul class="nav navbar-nav">
+                     <li class="user user-menu">
+                         <a href="#{request.contextPath}/pages/usuario/meus_dados_usuario.jsf?idUsuario=#{autenticadorBB.idUsuarioLogado}" >
+                         	<i class="fa fa-user text-nav-icon x-bigger"></i>                            
+                            <span class="hidden-xs">#{autenticadorBB.nomeUsuarioLogado}</span>
+                         </a>
+                     </li>
+                 </ul>
+             </div>
+         </nav>
+     </header>
+</ui:component>

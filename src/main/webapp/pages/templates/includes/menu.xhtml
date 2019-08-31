@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	
+	<h:form>
+		<ul class="sidebar-menu">
+			<!-- Menu: Início -->
+			<li class="#{activeMenu eq 'inicial' ? 'active' : ''}">
+				<p:link href="/pages/inicio.jsf"> 
+					<i class="fa fa-home"></i><span>Início</span> 
+				</p:link>
+			</li>
+			
+			<!-- Menu: Sair -->
+			<li class="#{activeMenu eq 'inicial' ? 'active' : ''}">
+				<h:commandLink action="#{autenticadorBB.realizarLogout()}" > 
+					<i class="fa fa-power-off"></i><span>Sair</span> 
+				</h:commandLink>
+			</li>
+			
+			<!-- Menu: Dashboard (ADM) -->
+			<li class="#{activeMenu eq 'dashboard' ? 'active' : ''}" jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado}">
+				<p:link href="/pages/dashboard/dashboard_adm.jsf"> 
+					<i class="fa fa-user"></i><span>Dashboard (ADM)</span> 
+				</p:link>
+			</li>
+			
+			<!-- Menu: Cadastros básicos -->
+			<li class="treeview #{activeMenu eq 'cadastrosBasicos' ? 'active' : ''}" > 
+				<a href="#"> 
+					<i class="fa fa-user"></i> <span>Cadastros básicos</span> 
+					<i class="fa fa-angle-left pull-right"></i>
+				</a>
+				
+				<!-- SubMenu: Meus Dados -->
+				<ul class="treeview-menu" >
+					<li class="#{activeSubmenu eq 'meudado' ? 'active' : ''}" >
+						<p:link href="/pages/usuario/meus_dados_usuario.jsf?idUsuario=#{autenticadorBB.idUsuarioLogado}" ajax="false">
+							<i class="fa fa-circle-o"></i>Meus Dados
+						</p:link>
+					</li>					
+				</ul>				
+				
+				<!-- SubMenu: Usuários -->
+				<ul class="treeview-menu" jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado}">
+					<li class="#{activeSubmenu eq 'usuario' ? 'active' : ''}" >
+						<p:link href="/pages/usuario/pesquisar_usuario.jsf" ajax="false">
+							<i class="fa fa-circle-o"></i>Usuários
+						</p:link>
+					</li>					
+				</ul>
+				
+				<!-- SubMenu: Pessoas -->
+				<ul class="treeview-menu" jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado}">
+					<li class="#{activeSubmenu eq 'usuario' ? 'active' : ''}" >
+						<p:link href="/pages/pessoa/pesquisar_pessoa.jsf" ajax="false">
+							<i class="fa fa-circle-o"></i>Pessoas
+						</p:link>
+					</li>					
+				</ul>				
+			</li>
+			
+			<!-- Menu: Agenda -->
+			<li class="treeview #{activeMenu eq 'agenda' ? 'active' : ''}" > 
+				<a href="#"> 
+					<i class="fa fa-user"></i> <span>Agenda</span> 
+					<i class="fa fa-angle-left pull-right"></i>
+				</a>
+				
+				<!-- SubMenu: Contatos -->
+				<ul class="treeview-menu" >
+					<li class="#{activeSubmenu eq 'contato' ? 'active' : ''}" >
+						<p:link href="/pages/contato/pesquisar_contato.jsf" ajax="false">
+							<i class="fa fa-circle-o"></i>Contatos
+						</p:link>
+					</li>					
+				</ul>
+				
+				<!-- SubMenu: Grupos -->
+				<ul class="treeview-menu" >
+					<li class="#{activeSubmenu eq 'grupo' ? 'active' : ''}" >
+						<p:link href="/pages/grupo/pesquisar_grupo.jsf" ajax="false">
+							<i class="fa fa-circle-o"></i>Grupos
+						</p:link>
+					</li>					
+				</ul>				
+			</li> 			
+			
+			<!-- Menu: Relatórios -->
+			<li class="treeview #{activeMenu eq 'relatorios' ? 'active' : ''}" > 
+				<a href="#"> 
+					<i class="fa fa-user"></i> <span>Relatórios</span> 
+					<i class="fa fa-angle-left pull-right"></i>
+				</a>
+				
+				<!-- SubMenu: Aniversariantes -->
+				<ul class="treeview-menu" >
+					<li class="#{activeSubmenu eq 'aniversariantes' ? 'active' : ''}" >
+						<p:link href="/pages/relatorios/rel_lista_aniversariantes.jsf" ajax="false">
+							<i class="fa fa-circle-o"></i>Lista de Aniversariantes
+						</p:link>
+					</li>					
+				</ul>				
+			</li>
+		</ul>
+	</h:form>
+</ui:composition>

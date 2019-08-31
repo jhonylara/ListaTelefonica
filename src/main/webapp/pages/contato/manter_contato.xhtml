@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" >
+	
+	<ui:composition template="/pages/templates/layout.xhtml">
+	   	<ui:param name="activeSubmenu" value="contato"/>
+    	<ui:param name="activeMenu" value="agenda"/>
+    	
+    	<f:metadata>
+        	<f:viewAction action="#{manterContatoBB.prepararAlteracao(param.idContatoPesquisa)}" />
+    	</f:metadata>
+    	    	
+		<ui:define name="breadcrumb">		
+		   <li>		   
+		  		<span>        			
+		  			<h:outputText value="Contatos/Alterar Contato" rendered="#{manterContatoBB.ehAlteracao}" />
+        			<h:outputText value="Contatos/Incluir Contato" rendered="#{!manterContatoBB.ehAlteracao}" />
+        	 	</span> 
+		   </li>          
+		</ui:define>
+
+		<ui:define name="body">
+			<div class="box">
+				<h:form id="usuarioInserirForm" acceptcharset="ISO-8859-1 UTF-8">					
+					<div class="box-header with-border">
+						<div class="col-xs-6 col-sm-3">
+							<h3 class="box-title">
+								<h:outputText value="Alterar Contato" rendered="#{manterContatoBB.ehAlteracao}" />
+       							<h:outputText value="Incluir Contato" rendered="#{!manterContatoBB.ehAlteracao}" />
+							</h3>
+						</div>	
+						<div class="box-tools pull-right">
+							<span class="observacao">(*) Campo obrigatório</span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-12">
+						<p:inputText type="hidden" id="id" value="#{manterContatoBB.id}" />
+					</div>
+
+					<!-- Campo: nome -->
+					<div class="form-group col-md-3">
+						<p:outputLabel for="nome" value="Nome" indicateRequired="true" />
+
+						<p:inputText 
+							value="#{manterContatoBB.nome}"							
+							id="nome" 
+							required="true" 
+							maxlength="150"
+							styleClass="form-control" 
+						/>							
+					</div>
+					
+					<!-- Campo: email -->
+					<div class="form-group col-md-3">
+						<p:outputLabel for="email" value="Email" indicateRequired="false" />
+
+						<!-- Fonte: https://www.mkyong.com/jsf2/primefaces/primefaces-jsf-email-validator-example/ -->
+						<p:inputText
+							value="#{manterContatoBB.email}" 
+							id="email"							 
+							required="false"
+							maxlength="70"							
+							validatorMessage="Email: informe um endereço de email válido."
+							styleClass="form-control" 
+							>
+
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" 
+							/>
+						</p:inputText>
+					</div>
+					
+					<div class="form-group col-md-3">
+						<p:outputLabel for="emailConfirmacao" value="Email (confirmação)" indicateRequired="false" />
+
+						<!-- Fonte: https://www.mkyong.com/jsf2/primefaces/primefaces-jsf-email-validator-example/ -->
+						<p:inputText
+							value="#{manterContatoBB.emailConfirmacao}" 
+							id="emailConfirmacao"							 
+							required="false"
+							maxlength="70"							
+							validatorMessage="Email (confirmação): informe um endereço de email válido."
+							styleClass="form-control" 
+							>
+
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" 
+							/>
+						</p:inputText>
+					</div>
+					
+					<!-- Campo: dt nascimento -->
+					<div class="form-group col-md-3">						
+						<p:outputLabel for="dtNascimento" value="Data de Nascimento" indicateRequired="false" />
+
+						<p:calendar 
+							value="#{manterContatoBB.dtNascimento}"
+							id="dtNascimento"
+							required="false"  
+							pattern="dd/MM/yyyy" 
+							mask="true"
+							locale="pt_BR"			
+							styleClass="form-control"
+							style="border-color: transparent !important; padding-left: 0px !important;"															
+						/>
+					</div>
+					
+					<!--Telefones
+						=======================================================================
+						
+						Telefones: campos 
+					-->					
+					<div class="box-body row">
+						<div jsf:id="telefoneForm">
+							<div class="form-group col-md-12">
+								<div class="box-header with-border">
+									<h4> Telefones</h4>
+								</div>
+							</div>
+						
+							<!-- Campo: Código de área -->	
+							<div class="form-group col-md-2">
+								<p:outputLabel for="codigoArea" value="Código de Área" />
+								<p:inputText
+									value="#{manterContatoBB.telefoneCodigoArea}"
+									id="codigoArea" 
+									maxlength="3" 
+									styleClass="form-control">
+								</p:inputText>
+							</div>
+							
+							<!-- Campo: DDD -->
+							<div class="form-group col-md-2">
+								<p:outputLabel for="ddd" value="DDD" />
+								<p:inputText
+									value="#{manterContatoBB.telefoneDdd}"
+									id="ddd" 
+									maxlength="3" 
+									styleClass="form-control">
+								</p:inputText>
+							</div>
+							
+							<!-- Campo: Número -->
+							<div class="form-group col-md-2">
+								<p:outputLabel for="numero" value="Número" />
+								<p:inputText
+									value="#{manterContatoBB.telefoneNumero}"
+									id="numero"
+									maxlength="19"									 
+									styleClass="form-control">
+									
+									<f:validateLength minimum="8" maximum="9" />
+								</p:inputText>
+							</div>
+	
+							<!-- Campo: Categoria -->
+							<div class="form-group col-md-2">
+								<p:outputLabel for="categoria" value="Categoria/Tipo" />
+								
+								<p:selectOneMenu 
+									value="#{manterContatoBB.telefoneCategoriaCodigo}"
+										id="categoria" 
+										required="false" 
+										styleClass="form-control #{ component.valid ? '' :'select-error'}" >
+										<f:selectItem 
+											itemLabel="Selecione" itemValue="" />
+										<f:selectItems 
+											value="#{manterContatoBB.telefoneCategoriaValores}"
+											var="categoria" 
+											itemLabel="#{categoria.descricao}" 
+											itemValue="#{categoria.codigo}" />
+									</p:selectOneMenu>
+							</div>
+							
+							<!--
+								Telefones: botão de inclusão ou alteração 
+							 -->
+							<div class="form-group col-md-2">
+								<p:outputLabel for="incluirTelefone" value="?" style="color:white !important" />
+								
+								<p:commandButton 
+									value="Incluir Telefone"
+									id="incluirTelefone" 
+									partialSubmit="true" 
+							    	actionListener="#{manterContatoBB.incluirTelefone()}" 
+							    	ajax="true"
+							    	update="telefoneForm gridFormTelefone"
+							    	rendered="#{empty manterContatoBB.telefoneIndex}"						    	
+							    	process="telefoneForm"
+							    	styleClass="form-control ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-default "
+							    />
+							    
+							    <p:commandButton
+							    	value="Alterar Telefone" 
+							    	id="incluirTelefone2" 
+							    	partialSubmit="true"						    	
+							    	actionListener="#{manterContatoBB.alterarTelefone()}" 
+							    	ajax="true"
+							    	update="telefoneForm gridFormTelefone" 
+							    	rendered="#{not empty manterContatoBB.telefoneIndex}"
+							    	process="telefoneForm"
+							    	styleClass="form-control ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-default "
+							    />
+							</div>
+							
+							<!--
+								Telefones: lista dos telefones inseridos mais botões de ação 
+							 -->						
+							<div class="form-group col-md-12">							
+								<div jsf:id="gridFormTelefone">
+				    				<p:dataTable 
+				    					value="#{manterContatoBB.itensTelefoneListaDto}"
+				    					var="telefoneDto"						    		 
+							    		paginator="false" 
+							    		rowHover="true"
+				                		id="gdtelefones" 
+				                		lazy="false"	           
+				                		emptyMessage="Nenhum telefone inserido/cadastrado." >
+				                				
+							        		<p:column headerText="Código de Área" sortBy="#{telefoneDto.codigoArea}">
+							            		<h:outputText value="#{telefoneDto.codigoArea}" />
+							        		</p:column>
+							        		
+							        		<p:column headerText="DDD" sortBy="#{telefoneDto.ddd}">
+							            		<h:outputText value="#{telefoneDto.ddd}" />
+							        		</p:column>
+							        		
+							        		<p:column headerText="Número" sortBy="#{telefoneDto.numero}">
+							            		<h:outputText value="#{telefoneDto.numero}" />
+							        		</p:column>
+							        		
+							        		<p:column headerText="Categoria" sortBy="#{telefoneDto.categoriaDescricao}">
+							            		<h:outputText value="#{telefoneDto.categoriaDescricao}" />
+							        		</p:column>
+									        
+							    		    <p:column headerText="Ações" width="100" style="text-align: center;" >
+							        			<p:commandButton 
+							        				id="cmdEditarTelefone" icon="ui-icon-pencil"									 	 
+												 	title="Alterar Telefone"	
+											 		ajax="true"
+											 		partialSubmit="true"
+											 		process=":#{p:component('gridFormTelefone')}"
+												 	actionListener="#{manterContatoBB.carregarTelefoneParaAlteracao(telefoneDto.sequencia)}"							
+												 	update=":#{p:component('telefoneForm')} :#{p:component('gridFormTelefone')}">
+												</p:commandButton>
+						    	        		<p:commandButton 
+							    	        		id="cmdExcluirTelefone" icon="ui-icon-trash"									 	 
+												 	title="Excluir Telefone"	
+												 	ajax="true"
+												 	partialSubmit="true"
+												 	process=":#{p:component('gridFormTelefone')}"
+												 	actionListener="#{manterContatoBB.excluirTelefone(telefoneDto.sequencia)}"							
+											 		update=":#{p:component('gridFormTelefone')}">
+											 		
+											 		<p:confirm header="Confirmação" message="Tem certeza que deseja continuar?" icon="ui-icon-alert" />
+												</p:commandButton>
+	
+												<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+								        			<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								        			<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								    			</p:confirmDialog>
+											</p:column>
+									</p:dataTable>				
+								</div> 
+							</div>
+						</div>													
+					</div>
+					<!--Endereço
+						=======================================================================
+					-->	
+					<div class="box-body row">						
+						<div class="form-group col-md-12">
+							<div class="box-header with-border">
+								<h4>Endereço</h4>
+							</div>
+						</div>
+					
+						<!-- 1ª Linha -->
+						<!-- Campo: Tipo -->	
+						<div class="form-group col-md-3">
+							<p:outputLabel for="enderecoTipos" value="Tipo" />
+							
+							<p:selectOneMenu 
+								value="#{manterContatoBB.enderecoTipoCodigo}"
+									id="enderecoTipos" 
+									required="false" 
+									styleClass="form-control #{ component.valid ? '' :'select-error'}" >
+									<f:selectItem 
+										itemLabel="Selecione" itemValue="" />
+									<f:selectItems 
+										value="#{manterContatoBB.enderecoTipoValores}"
+										var="enderecoTipo" 
+										itemLabel="#{enderecoTipo.descricao}" 
+										itemValue="#{enderecoTipo.codigo}" />
+							</p:selectOneMenu>
+						</div>
+						
+						<!-- Campo: Logradouro -->
+						<div class="form-group col-md-3">
+							<p:outputLabel for="enderecoLogradouro" value="Logradouro" />
+							
+							<p:inputText
+								value="#{manterContatoBB.enderecoLogradouro}"
+								id="enderecoLogradouro" 
+								maxlength="255"									 
+								styleClass="form-control">
+							</p:inputText>
+						</div>
+						
+						<!-- Campo: Número -->
+						<div class="form-group col-md-3">
+							<p:outputLabel for="enderecoNumero" value="Número (ou loteamento)" />
+							<p:inputText
+								value="#{manterContatoBB.enderecoNumeroOuLoteamento}"
+								id="enderecoNumero"
+								maxlength="70"									 
+								styleClass="form-control">
+							</p:inputText>
+						</div>
+
+						<!-- Campo: Complemento -->
+						<div class="form-group col-md-3">
+							<p:outputLabel for="enderecoComplemento" value="Complemento" />
+							
+							<p:inputText
+								value="#{manterContatoBB.enderecoComplemento}"
+								id="enderecoComplemento" 
+								maxlength="150"									
+								styleClass="form-control">
+							</p:inputText>
+						</div>
+												
+						<!-- 2ª Linha -->
+						<!-- Campo: Localidade -->
+						<div class="form-group col-md-3">
+							<p:outputLabel for="enderecoLocalidade" value="Localiade" />
+							
+							<p:inputText
+								value="#{manterContatoBB.enderecoLocalidade}"
+								id="enderecoLocalidade" 
+								maxlength="150"									 
+								styleClass="form-control">
+							</p:inputText>
+						</div>
+						
+						<!-- Campo: UF -->
+						<div class="form-group col-md-3">
+							<p:outputLabel for="enderecoUfs" value="UF" />
+							
+							<p:selectOneMenu 
+								value="#{manterContatoBB.enderecoUfCodigo}"
+									id="enderecoUfs" 
+									required="false" 
+									styleClass="form-control #{ component.valid ? '' :'select-error'}" >
+									<f:selectItem 
+										itemLabel="Selecione" itemValue="" />
+									<f:selectItems 
+										value="#{manterContatoBB.enderecoUfValores}"
+										var="enderecoUf" 
+										itemLabel="#{enderecoUf.descricao}" 
+										itemValue="#{enderecoUf.codigo}" />
+							</p:selectOneMenu>
+						</div>
+						
+						<!-- Campo: CEP -->
+						<div class="form-group col-md-3">
+							<p:outputLabel for="enderecoCep" value="CEP" />
+							
+							<p:inputMask
+								value="#{manterContatoBB.enderecoCep}"
+								id="enderecoCep"
+								maxlength="9" 
+								mask="99999-999" 
+								size="8" 
+								styleClass="form-control">
+							</p:inputMask>
+						</div>
+						
+						<!-- Campo: Categoria -->
+						<div class="form-group col-md-3">
+							<p:outputLabel for="enderecoCategorias" value="Categoria" />
+							
+							<p:selectOneMenu 
+								value="#{manterContatoBB.enderecoCategoriaCodigo}"
+									id="enderecoCategorias" 
+									required="false" 
+									styleClass="form-control #{ component.valid ? '' :'select-error'}" >
+									<f:selectItem 
+										itemLabel="Selecione" itemValue="" />
+									<f:selectItems 
+										value="#{manterContatoBB.enderecoCategoriaValores}"
+										var="enderecoCategoria" 
+										itemLabel="#{enderecoCategoria.descricao}" 
+										itemValue="#{enderecoCategoria.codigo}" />
+							</p:selectOneMenu>								
+						</div>
+					</div>
+					
+					<!--
+						Grupos
+						=======================================================================
+						
+						Tag/componente utilizado: https://www.primefaces.org/showcase/ui/input/checkboxMenu.xhtml
+					-->
+					<div class="box-body row">
+						<div class="form-group col-md-12">
+							<div class="box-header with-border">
+								<h4>Grupos</h4>
+							</div>
+						</div>
+						
+						<div class="form-group col-md-12">							
+							<p:selectCheckboxMenu
+								value="#{manterContatoBB.idsGruposSelecionados}" 
+								id="grupos"																
+								multiple="true" 
+								filter="true" 
+								filterMatchMode="startsWith"
+								styleClass="form-control"																								
+								>
+							
+								<f:selectItems 
+									value="#{manterContatoBB.gruposDisponiveis}"
+									var="grupo" 
+									itemLabel="#{grupo.nome}" 
+									itemValue="#{grupo.id}" />
+							</p:selectCheckboxMenu>
+						</div>
+					</div>
+
+					<!--	Botões de ação - Contato
+							=====================================================================================						 	
+					-->
+					<div 
+						class="box-footer align-center with-border"
+						jsf:rendered="#{!manterContatoBB.ehAlteracao}"
+						>
+											
+						<p:commandButton 
+							value="Incluir" 
+							title="Incluir Contato"
+							actionListener="#{manterContatoBB.incluir()}" 
+							styleClass="btn btn-primary" 
+						/>
+					</div>					
+					<div 
+						class="box-footer align-center with-border" 
+						jsf:rendered="#{manterContatoBB.ehAlteracao}"
+						>
+											
+						<p:commandButton 
+							value="Alterar" 
+							title="Salvar Alteração"
+							actionListener="#{manterContatoBB.salvarAlteracao()}" 
+							styleClass="btn btn-primary" 
+						/>
+					</div>				
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</ui:component>

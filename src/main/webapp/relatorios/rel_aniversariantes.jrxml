@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_lista_aniversariantes" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fa10bbdc-fcd1-47ae-b741-69ae16d4aca8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="MES" class="java.lang.String"/>
+	<parameter name="CAMINHO_LOGO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome do contato]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[Email do contato]]></fieldDescription>
+	</field>
+	<field name="dtNascimento" class="java.util.Date">
+		<fieldDescription><![CDATA[Data de Nascimento]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="-1" width="551" height="63" backcolor="#000000" uuid="7b1810b9-6b80-41ab-8365-55ad76153d19">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="70" y="-1" width="485" height="31" forecolor="#FFFFFF" uuid="9a640111-ede8-4c4d-9478-bd2721e61b90"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="26"/>
+				</textElement>
+				<text><![CDATA[Java EE/JSF Cia LTDA]]></text>
+			</staticText>
+			<image>
+				<reportElement x="2" y="0" width="68" height="60" uuid="2e516774-eec1-4d9b-94f1-ffba7acfa907"/>
+				<imageExpression><![CDATA[$P{CAMINHO_LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="70" y="27" width="482" height="30" forecolor="#FFFFFF" uuid="f8c609aa-e3e3-4e86-bf64-426a3cc83eb3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Lista de Aniversariantes - Mês: " + $P{MES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="20" y="0" width="237" height="20" backcolor="#939596" uuid="991ae42f-7f50-4f8d-b3e9-5427b436f3c2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="0" width="232" height="20" uuid="a359a5ce-983b-46e4-a92f-9843e0695f2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="258" y="0" width="182" height="20" backcolor="#939596" uuid="939750cb-711d-4db9-bd40-74a63cdc24bd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="265" y="0" width="170" height="20" uuid="104db341-a31d-42e3-a069-09f9eb21ad29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="440" y="0" width="112" height="20" backcolor="#939596" uuid="3906fca5-9c8c-420d-85ab-93470794f857"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="445" y="0" width="104" height="20" uuid="22595684-2446-4192-ba64-13b4b0e049a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dt. Nascimento]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="1" y="0" width="19" height="20" backcolor="#939596" uuid="d446c1ec-6af0-4185-acdc-02b3f0a0e3ff"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="0" width="18" height="20" uuid="0e155fd7-733b-4144-88c5-07ec03f4a9b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="2" width="551" height="18" forecolor="#FFFFFF" backcolor="#C2C0C0" uuid="3fe97f9f-53e0-4cf5-bac2-f9cd675efbc1">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="20" y="1" width="238" height="18" uuid="9da3138d-6040-477f-ad8c-31e9a3ce98bf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5f87b237-7f99-4725-8fa4-71aa801a390b"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="260" y="1" width="180" height="18" uuid="125b0831-6033-4fda-a149-ad0997745010">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e8351793-189a-4586-bf83-124ce7879ed4"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="441" y="1" width="110" height="18" uuid="f6caee1d-b890-492c-aa58-51b12eca6386">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f8432c75-9290-46d5-b806-cbe7ef1b51a0"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dtNascimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="3" width="16" height="16" uuid="5249bb61-63a2-4132-9bd6-e5cbe3538c57"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="339" y="1" width="212" height="17" uuid="721fc8e0-c11d-4cda-948d-d04f97e515f6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20">
+			<textField>
+				<reportElement x="338" y="2" width="214" height="18" uuid="1af0ff8f-ccb5-497f-b300-29c19f273669"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT} + " aniversariantes."]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

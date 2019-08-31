@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Parâmetros JSF -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>Nome Aplicacao</display-name>
+
+ <filter>
+      <filter-name>GestorLogadoListener</filter-name>
+      <filter-class>br.edu.aplicacao.listeners.GestorLogadoListener</filter-class>    
+  </filter>
+  <filter-mapping>
+      <filter-name>GestorLogadoListener</filter-name>
+      <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <context-param>
+    <param-name>com.sun.faces.writeStateAtFormEnd</param-name>
+    <param-value>false</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+    <param-value>true</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>server</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>bootstrap</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>primefaces.FONT_AWESOME</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>primefaces.TRANSFORM_METADATA</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>pages/login.jsf</welcome-file>
+  </welcome-file-list>
+  
+  <mime-mapping>
+    <extension>woff2</extension>
+    <mime-type>application/x-font-woff2</mime-type>
+  </mime-mapping>
+  
+  <mime-mapping>
+    <extension>xhtml</extension>
+    <mime-type>application/xml</mime-type>
+  </mime-mapping>
+  
+  <mime-mapping>
+    <extension>jsf</extension>
+    <mime-type>application/xml</mime-type>
+  </mime-mapping>
+  
+  <mime-mapping>
+    <extension>eot</extension>
+    <mime-type>font/eot</mime-type>
+  </mime-mapping>
+  
+  <mime-mapping>
+    <extension>woff</extension>
+    <mime-type>font/woff</mime-type>
+  </mime-mapping>
+  
+  <mime-mapping>
+    <extension>ttf</extension>
+    <mime-type>font/ttf</mime-type>
+  </mime-mapping>
+</web-app>

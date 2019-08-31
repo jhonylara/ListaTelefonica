@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge; charset=UTF-8"/>
+	<title>Login</title>
+	<h:outputStylesheet library="styles" name="css/login-box.css"/>
+</h:head>
+
+<h:body>
+	<div id="login-box">
+		<h:form>
+			<h3>Nome do Sistema</h3>
+			Informe seu login e senha para se autenticar no sistema.
+			<p:messages id="messages" showIcon="false" closable="true" autoUpdate="true"/>
+			<div id="login-box-name" style="margin-top: 15px;">
+				<p:outputLabel for="login" value="Login:" />
+			</div>
+			<div id="login-box-field" style="margin-top: 20px;">				 
+				<p:inputText id="login" styleClass="form-login" label="Login" value="#{autenticadorBB.login}" size="25" required="true">
+					<f:validateLength minimum="3" maximum="15" />
+				</p:inputText>												
+			</div>			
+			<div id="login-box-name">
+				<p:outputLabel for="senha" value="Senha:" />
+			</div>
+			<div id="login-box-field">
+				<p:password id="senha" styleClass="form-login" label="Senha" value="#{autenticadorBB.senha}" size="25" required="true">
+					<f:validateLength minimum="3" maximum="15" />
+				</p:password>				
+			</div>			
+			<br />
+			<!-- 			 
+			<span class="login-box-options">
+				<h:commandLink style="margin-left: 110px;" action="#" value="Esqueci minha senha" />
+			</span>
+			<br /> 
+			<br />
+			 -->			
+			<h:commandLink action="#{autenticadorBB.realizarLogin()}">
+				<h:graphicImage width="103" height="42" style="margin-left: 90px;" name="login-btn.png" library="images" />
+			</h:commandLink>		
+		</h:form>
+	</div>
+</h:body>
+</html>

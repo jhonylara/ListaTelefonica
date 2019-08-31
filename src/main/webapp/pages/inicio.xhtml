@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/pages/templates/layout.xhtml">				
+		
+	<ui:param name="activeMenu" value="inicial"/>
+	<ui:define name="pageTitle"> Código/projeto base </ui:define>
+	<ui:define name="pageDescription"> Início </ui:define>
+	<ui:define name="breadcrumb"/>
+	<ui:define name="body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-default">
+					<div class="box-header with-border">
+						<h3 class="box-title">
+							<i class="fa fa-table x-big"></i> Bem-vindo(a)!
+						</h3>
+					</div>
+					<div class="post clearfix">
+						<p>Este código/projeto foi desenvolvido com o intuito de servir
+							como base para implementação de sistemas na plataforma JavaEE/Web.</p>							
+						<p>Esta tela deve ser preparada para conter informações e
+							funcionalidades relevantes aos usuários e ao negócio do cliente.</p>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

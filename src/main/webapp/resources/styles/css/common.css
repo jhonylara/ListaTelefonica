@@ -1,0 +1,119 @@
+@charset "utf-8";
+/* 
+    Todos os CSS's comuns entre todas as areas do sistem e que nao estao no template base
+*/
+
+.align-right {
+    text-align: right;
+}
+.align-center {
+    text-align: center;
+}
+
+.margin-t-15 {
+    margin-top: 15px;
+} 
+
+no-padding {
+    padding: 0 !important;
+}
+
+/* linha onde ficam os comandos delecao das dialogs */
+.dialog-controls-box {
+    margin-top: 10px; 
+    text-align: right;
+}
+
+/* imagem do usuario */
+#userImage {
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: -2px;
+}
+@media (max-width: 767px) {
+    #userImage {
+        float: none;
+        margin-right: 0;
+        margin-top: -8px;
+        line-height: 10px;
+    }
+}
+
+/* arvore de permissoes do grupo */
+.permission-tree {
+    margin-top: 15px;
+    overflow: auto;
+    height: 300px !important;
+    width: auto !important;
+}
+
+/* legenda do grafico */
+.chart-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
+
+/* ajuste da altura das linhas */
+.row-with-button tr {
+    height: 45px;
+}
+
+/***
+Footer
+***/
+
+.footer {
+  padding: 8px 20px 5px 20px; 
+  font-size: 12px;
+}
+
+.footer:after,.footer:before {
+  content: "";
+  display: table;
+  line-height: 0;
+}
+
+.footer:after {
+  clear: both;
+}
+
+.footer .footer-inner {
+  color: #FFFFFF;
+  float: left;
+ 
+}
+
+.footer .footer-tools {
+  float: right;
+  display: inline-block;
+}
+
+.footer .footer-tools .go-top { 
+  background-color: #2E3139;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: -2px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  padding: 0px 6px 0px 6px;
+    font-size: 22px;
+  margin-bottom: 5px; 
+  color: #8a8a8a;
+  opacity: 0.7;
+}
+
+.footer .footer-tools .go-top i {
+  font-size: 22px;
+  margin-bottom: 5px; 
+  color: #8a8a8a;
+}
+.footer .footer-tools .go-top:hover {
+    opacity: 0.7;
+}

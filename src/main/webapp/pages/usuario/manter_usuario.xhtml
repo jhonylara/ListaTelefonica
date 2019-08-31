@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" >
+	
+	<ui:composition template="/pages/templates/layout.xhtml">
+		<ui:param name="activeSubmenu" value="usuario"/>
+    	<ui:param name="activeMenu" value="cadastrosBasicos"/>
+    	
+		<f:metadata>
+        	<f:viewAction action="#{manterUsuarioBB.prepararAlteracaoPerfil(param.idUsuarioPesquisa)}" />
+    	</f:metadata>
+    	    	
+		<ui:define name="breadcrumb">		
+		   <li>		   
+		  		<span>
+        			<h:outputText value="Usuários/Alterar Perfil Usuário" rendered="#{manterUsuarioBB.ehAlteracaoPerfil}"/>
+        			<h:outputText value="Usuários/Incluir Usuário" rendered="#{!manterUsuarioBB.ehAlteracaoPerfil}"/>
+        	 	</span> 
+		   </li>          
+		</ui:define>
+
+		<ui:define name="body">
+			<div class="box">
+				<h:form id="usuarioInserirForm" acceptcharset="ISO-8859-1 UTF-8">					
+					<div class="box-header with-border">
+						<div class="col-xs-6 col-sm-3">
+							<h3 class="box-title">
+								 <h:outputText value="Alterar Perfil de Acesso do Usuário" 	rendered="#{manterUsuarioBB.ehAlteracaoPerfil}"/>
+        						 <h:outputText value="Incluir Usuário" 						rendered="#{!manterUsuarioBB.ehAlteracaoPerfil}"/>
+							</h3>
+						</div>	
+						<div class="box-tools pull-right">
+							<span class="observacao">(*) Campo obrigatório</span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-12">
+						<p:inputText type="hidden" id="id" value="#{manterUsuarioBB.id}" />
+					</div>
+
+					<!-- Campo: nome -->
+					<div class="form-group col-md-6">
+						<p:outputLabel for="nome" value="Nome" indicateRequired="true" />
+
+						<p:inputText 
+							value="#{manterUsuarioBB.nome}"
+							disabled="#{manterUsuarioBB.ehAlteracaoPerfil}"
+							id="nome" 
+							required="true" 
+							maxlength="150"
+							styleClass="form-control" 
+						/>							
+					</div>
+					
+					<!-- Campo: login -->
+					<div class="form-group col-md-6">
+						<p:outputLabel for="login" value="Login" indicateRequired="true" />
+
+						<p:inputText 
+							value="#{manterUsuarioBB.login}"
+							disabled="#{manterUsuarioBB.ehAlteracaoPerfil}"
+							id="login" 
+							required="true" 
+							maxlength="15"
+							styleClass="form-control" 
+						>
+							<f:validateLength minimum="3" maximum="8" />
+						</p:inputText>							
+					</div>
+					
+					<!-- Campo: senha -->
+					<div 
+						class="form-group col-md-6" 
+						jsf:rendered="#{!manterUsuarioBB.ehAlteracaoPerfil}">
+						
+						<p:outputLabel for="senha" value="Senha" indicateRequired="true" />
+
+						<p:password 
+							value="#{manterUsuarioBB.senha}"
+							readonly="#{manterUsuarioBB.ehAlteracaoPerfil}"
+							id="senha" 
+							required="true"
+							maxlength="10"
+							styleClass="form-control" 
+						/>							
+					</div>
+					
+					<!-- Campo: confirmação senha -->
+					<div 
+						class="form-group col-md-6" 
+						jsf:rendered="#{!manterUsuarioBB.ehAlteracaoPerfil}">
+						
+						<p:outputLabel for="confirmacaoSenha" value="Senha (confirmação)" indicateRequired="true" />
+
+						<p:password 
+							value="#{manterUsuarioBB.senhaConfirmacao}"
+							readonly="#{manterUsuarioBB.ehAlteracaoPerfil}"
+							id="confirmacaoSenha" 
+							required="true" 
+							maxlength="10"
+							styleClass="form-control" 
+						/>							
+					</div>
+					
+					<!-- Campo: será um adm (ou não) -->
+					<div class="form-group col-md-12" jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado}">
+						  <p:outputLabel for="ehAdm" value="Administrador" />
+		      			  <p:selectBooleanCheckbox id="ehAdm" value="#{manterUsuarioBB.ehAdministrador}" />
+					</div>					
+										
+					<!-- Botões de ação -->
+					<div 
+						class="box-footer align-center with-border" 
+						jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado and !manterUsuarioBB.ehAlteracaoPerfil}">
+											
+						<p:commandButton 
+							value="Incluir" 
+							title="Incluir Usuário"
+							actionListener="#{manterUsuarioBB.incluir()}" 
+							styleClass="btn btn-primary" 
+						/>
+					</div>					
+					<div 
+						class="box-footer align-center with-border" 
+						jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado and manterUsuarioBB.ehAlteracaoPerfil}">
+											
+						<p:commandButton 
+							value="Alterar" 
+							title="Salvar Alteração de Perfil"
+							actionListener="#{manterUsuarioBB.salvarAlteracaoPerfil()}" 
+							styleClass="btn btn-primary" 
+						/>
+					</div>				
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</ui:component>

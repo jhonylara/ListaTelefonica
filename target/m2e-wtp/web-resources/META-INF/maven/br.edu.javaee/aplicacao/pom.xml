@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.edu.javaee</groupId>
+	<artifactId>aplicacao</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>appweb Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	
+	<!--
+		primefacesVersion 6.1: 04/2017
+		primefacesExtensions 6.1.0: 04/2017 
+	 -->
+	<properties>		
+		<theme.version>1.0.10</theme.version>
+		<primefacesVersion>6.1</primefacesVersion>
+		<primefacesExtensions>6.1.0</primefacesExtensions>
+	</properties>
+		
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>6.6.0</version>
+		</dependency>
+
+		<!-- log 
+			https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.9</version>
+		</dependency>
+	
+		<!--			
+			https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager/4.3.7.Final
+			5.2.17.Final -> 04/2018 
+			-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<!-- <version>4.3.7.Final</version> -->
+			<version>5.2.17.Final</version>			
+			<scope>provided</scope>
+		</dependency>
+	
+		<!-- 
+			configuração/uso: src/main/resources/META-INF -> persistence.xml				
+			https://mvnrepository.com/artifact/org.hsqldb/hsqldb
+			2.4.0 -> 04/2017 
+			-->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		
+		<!-- GestorLogadoListener javax.servlet.* 
+			https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>3.0-alpha-1</version>
+		    <scope>provided</scope>
+		</dependency>
+	
+		<!-- @Named,... 
+			https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+			
+		<!-- ExternalContext,... 
+			fonte: https://mvnrepository.com/artifact/javax.faces/javax.faces-api -->  
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>javax.faces-api</artifactId>
+			<version>2.3</version>
+		</dependency>		
+				
+		<!-- Layout em geral -->
+				
+		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+		<dependency>
+		    <groupId>org.primefaces</groupId>
+		    <artifactId>primefaces</artifactId>
+		    <version>${primefacesVersion}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.primefaces.extensions/primefaces-extensions -->
+		<dependency>
+		    <groupId>org.primefaces.extensions</groupId>
+		    <artifactId>primefaces-extensions</artifactId>
+		    <version>${primefacesExtensions}</version>
+		</dependency>		 
+	</dependencies>
+	<build>
+		<finalName>aplicacao</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

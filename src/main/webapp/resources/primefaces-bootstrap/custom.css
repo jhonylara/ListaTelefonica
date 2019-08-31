@@ -1,0 +1,301 @@
+@charset "utf-8";
+/* 
+    Todas as customizacoes do primefaces devem estar neste arquivo
+*/
+
+/* Sobrepoem a fonte do primefaces pela mesma do bootstrap*/
+.ui-widget{
+	font-family: sans-serif !important;
+}
+
+/* customizacao da apreentacao do texto dos botoes */
+.ui-button {
+    height: 34px;
+}
+
+/* tira aquele fundo vermelho do label na hr da validacao */
+label.ui-state-error {
+    background: none !important;
+}
+
+/* tira a sembra para que os botoes fiquem certos quando em widgets */
+.ui-widget-content button.ui-state-default {
+    box-shadow: none !important;
+}
+
+/* posicionamento do check nos checkboxes de datatable */ 
+span.ui-icon-check {
+    position: relative;
+    right: 1px;
+    bottom: 1px;
+}
+
+/* posicionamento da caixa do checkbox */
+.ui-chkbox-box {
+    position: relative;
+    top: 4px;
+}
+
+/* customizacao das mensagens de erro */ 
+.ui-messages > div {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+}
+.ui-messages-error {
+    border-color: #d73925 !important;
+    background-color: #dd4b39 !important;
+}
+.ui-messages-warn {
+    border-color: #e08e0b !important;
+    background-color: #f39c12 !important;
+}
+.ui-messages-info {
+    border-color: #00acd6 !important;
+    background-color: #00c0ef !important;
+}
+.ui-messages ul {
+    margin: 0 !important;
+}
+
+/* esconder os icones
+.ui-messages span.ui-messages-info-icon, 
+.ui-messages span.ui-messages-warn-icon, 
+.ui-messages span.ui-messages-error-icon { 
+    display: none;
+}
+*/
+.ui-messages-warn-summary, 
+.ui-messages-error-summary, 
+.ui-messages-info-summary {
+    font-weight: 600 !important;
+}
+
+
+/* corrige a opacidade dos checkboxes das grids */
+.ui-chkbox .ui-state-disabled {
+    opacity: initial !important;
+}
+
+/* remove uma linha preta escrota da header das tabelas */
+th[role="columnheader"].ui-state-default {
+    border-color: #ccc !important;
+}
+
+/* corrige a borda do paginador das datatables */
+div.ui-paginator {
+    border: 1px solid #dddddd !important; 
+    border-top: 0px !important;
+}
+
+/* remove aquele asterisco porco dos forms */
+.ui-outputlabel-rfi {
+    /*display: none;*/
+}
+
+/** diminui font de labels*/
+.ui-outputlabel{
+	font-size: 11.5px;	
+	display: inline-block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    max-width: 100%;
+}
+
+/* corrige a exibicao do selectonemenu */
+.ui-selectonemenu {
+    height: 34px;
+    display: block !important;
+    border-color: #d2d6de !important;
+    border-radius: 0 !important;
+}
+.ui-selectonemenu-trigger {
+    width: 30px !important;
+    padding: 3px 6px !important;
+    border-radius: 0 !important;
+}
+.ui-selectonemenu-label {
+    padding: 6px !important;
+}
+
+/* corrige o label dos treenodes da arvore de permissoes */
+.ui-treenode-label {
+    position: relative;
+    left: 3px;
+}
+.ui-tree-toggler {
+    position: relative !important;
+}
+
+
+/* fonte dos titulos*/
+.ui-column-title {
+	font-size: 11.5px;
+	 font-weight: bold;
+}
+
+/* fonte dos tds*/
+td {
+	font-size: 11.5px;
+}
+
+.ui-widget-header {
+	font-size: 11.5px;
+	font-weight: bold;
+}
+
+/* fonte do paginador*/
+.ui-paginator-pages{
+	font-size: 9px ;
+	font-weight: bold ;
+}
+/* fonte do paginador*/
+.ui-paginator-page{
+	font-size: 11.5px ;
+	font-weight: bold ;
+}
+
+
+.ui-state-active{
+	font-size: 11.5px ;
+	font-weight: bold ;
+}
+
+/* fonte da barra de progressao*/
+.ui-progressbar-label{
+	font-size: 11.5px ;
+	font-weight: bold ;
+}
+
+/* deixa os selects padrão jsf em cores de erro*/
+.select-error {
+	border: 1px solid #eed3d7;
+    color: #333333;
+}
+
+/* corrige o selectonemenu externo primefaces*/
+.ui-selectonemenu-label {
+	font-size: 14px ;
+	font-weight: bold ;
+	padding: 1px !important;
+	border-style: none !important;
+	box-shadow: none;
+	font-family: sans-serif !important;
+}
+
+/*corrige o tamanho e a fonte do selectmenu interno primefaces*/
+.ui-selectonemenu-item {
+	font-size: 14px ;
+	font-family: sans-serif !important;
+	
+}
+
+/*corrige o tamanho e a fonte do selectmenu interno primefaces*/
+.ui-selectonemenu-list-item {
+	font-size: 14px ;
+	font-family: sans-serif !important;
+	
+}
+
+/*corrige o tamanho e a fonte do inputfield do calendario*/
+.ui-inputfield {
+	font-size: 14px ;
+	font-family: sans-serif !important;
+	
+}
+
+/* Muda cor dos overlay ajax para cinza*/
+.ui-widget-overlay {
+    background: #c0c0c0 none repeat scroll 0 0;
+    opacity: 0.8;
+}
+
+/* Modifica as mensagens growl para aparecerem após o cabeçalho*/	
+.ui-growl {   
+    top: 8% !important;
+}
+
+/* Acerta o ícone das mensagens do topo do layout*/
+.ui-messages-info-icon, .ui-messages-warn-icon, .ui-messages-error-icon, .ui-messages-fatal-icon {
+    margin-left: -8px !important;
+    margin-right: -25px !important;
+}
+
+/* Acerta as mensagens do topo do layout*/
+.ui-messages-info-summary, .ui-messages-warn-summary, .ui-messages-error-summary, .ui-messages-fatal-summary, .ui-message-info-summary, .ui-message-warn-summary, .ui-message-error-summary, .ui-message-fatal-summary {
+    font-weight: bold !important;
+    margin-left: 25px !important;
+}
+
+/*Acerta a fonte dos links p:link*/
+.ui-link {
+	font: inherit !important;
+}
+
+/*Estilo para os textos de observação*/
+.observacao {
+    color: #666;
+    float: right;
+    font-size: 80%;
+}
+
+/* Centraliza radio button */
+.ui-radiobutton-icon {
+    margin: -1px 0 0;
+    margin-left: 0 !important;
+}
+
+/* Espaçamento dos labels */
+.ui-selectoneradio label {
+    margin: 4px 8px 0 0 !important;
+}
+
+/* Espaçamento dos labels */
+label {
+    margin-right: 8px !important;
+}
+
+/* SelectBooleanButton (retirar os valores */
+.ui-state-active {
+}
+
+/* titulo do modal */
+.ui-dialog.ui-widget-content .ui-dialog-title {
+    font-size: 16px !important;
+}
+
+/* SelectCheckboxMenu */
+.ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger .ui-icon {
+    margin: 6px 0 0 -4px;
+}
+
+.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-list-item {
+    padding: 0 5px;
+}
+
+/* SelectBooleanButton (retirar os valores */
+.ui-state-active {
+    font-size: 15px !important;
+    font-weight: normal !important;
+}
+
+.ui-slider {
+    background: #838688 none repeat scroll 0 0;
+    border: 0 none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) inset;
+    position: relative;
+    text-align: left;
+}
+.ui-slider .ui-slider-handle {
+    background: rgba(0, 0, 0, 0) url("#{resource['images/slider_handles.png']}") no-repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 0;
+    cursor: default;
+    height: 21px !important;
+    outline: 0 none;
+    width: 17px !important;
+    z-index: 2;
+}

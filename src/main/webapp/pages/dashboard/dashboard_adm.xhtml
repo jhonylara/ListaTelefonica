@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" >
+
+	<ui:composition template="/pages/templates/layout.xhtml">
+	   	<ui:param name="activeSubmenu" value="dashboard"/>
+    	<ui:param name="activeMenu" value="dashboard"/>
+    	
+    	<ui:define name="breadcrumb">		
+		   <li>Dashboard</li>          
+		</ui:define>
+		
+		<ui:define name="body">
+			<h:form id="graficosForm" >
+				<div class="box-tools pull-left">
+					<span class="observacao">(*) apenas do usuário logado</span>
+				</div>
+				
+				<div class="box-body row">						
+						<div class="form-group col-md-12">
+						</div>
+						
+						<div class="form-group col-md-6">
+							<p:outputLabel value="Quantidade Total de Usuários" />
+							
+							<p:inputText 
+								value="#{dashboardBB.qtdTotalDeUsuarios}"								
+								disabled="true"
+								styleClass="form-control">
+							</p:inputText>						
+						</div>
+						
+						<div class="form-group col-md-6">
+							<p:outputLabel value="Quantidade Total de Contatos*" />
+
+							<p:inputText 
+								value="#{dashboardBB.qtdTotalDeContatos}"
+								disabled="true" 
+								styleClass="form-control">
+							</p:inputText>
+					</div>						
+					</div>
+				
+				<div class="box-body row"
+					jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado}">
+					
+					<div class="form-group col-md-12">
+						<p:chart type="line" model="#{dashboardBB.graficoDeLinhasHistInclusao}" responsive="true"/>						
+					</div>				
+				</div>
+				
+				<div class="box-body row"
+					jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado}">
+						
+					<div class="form-group col-md-6">					
+						<p:chart type="pie" model="#{dashboardBB.graficoDePizzaContatosDdd}" responsive="true" />
+					</div>				
+					
+					<div class="form-group col-md-6">
+						<p:chart type="bar" model="#{dashboardBB.graficoDeBarraContatosLocalidade}" responsive="true" />
+					</div>
+				</div>
+
+				<div class="box-tools pull-left">
+					<span class="observacao">(*) apenas do usuário logado</span>
+				</div>	
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:component>

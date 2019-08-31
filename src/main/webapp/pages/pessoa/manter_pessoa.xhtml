@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" >
+	
+	<ui:composition template="/pages/templates/layout.xhtml">
+		<ui:param name="activeSubmenu" value="pessoa"/>
+    	<ui:param name="activeMenu" value="cadastrosBasicos"/>
+    	
+		<f:metadata>
+        	<f:viewAction action="#{manterPessoaBB.prepararAlteracaoPerfil(param.idPessoaPesquisa)}" />
+    	</f:metadata>
+    	    	
+		<ui:define name="breadcrumb">		
+		   <li>		   
+		  		<span>
+        			<h:outputText value="Pessoas/Alterar Perfil Usuário" rendered="#{manterPessoaBB.ehAlteracaoPerfil}"/>
+        			<h:outputText value="Pessoas/Incluir Usuário" rendered="#{!manterPessoaBB.ehAlteracaoPerfil}"/>
+        	 	</span> 
+		   </li>          
+		</ui:define>
+
+		<ui:define name="body">
+			<div class="box">
+				<h:form id="pessoaInserirForm" acceptcharset="ISO-8859-1 UTF-8">					
+					<div class="box-header with-border">
+						<div class="col-xs-6 col-sm-3">
+							<h3 class="box-title">
+								 <h:outputText value="Alterar Perfil de Acesso da Pessoa" 	rendered="#{manterPessoaBB.ehAlteracaoPerfil}"/>
+        						 <h:outputText value="Incluir Pessoa" 						rendered="#{!manterPessoaBB.ehAlteracaoPerfil}"/>
+							</h3>
+						</div>	
+						<div class="box-tools pull-right">
+							<span class="observacao">(*) Campo obrigatório</span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-12">
+						<p:inputText type="hidden" id="id" value="#{manterPessoaBB.id}" />
+					</div>
+
+					<!-- Campo: nome -->
+					<div class="form-group col-md-6">
+						<p:outputLabel for="nome" value="Nome" indicateRequired="true" />
+
+						<p:inputText 
+							value="#{manterPessoaBB.nome}"
+							disabled="#{manterPessoaBB.ehAlteracaoPerfil}"
+							id="nome" 
+							required="true" 
+							maxlength="150"
+							styleClass="form-control" 
+						/>							
+					</div>
+					
+					<!-- Campo: login -->
+					<div class="form-group col-md-6">
+						<p:outputLabel for="genero" value="Genero" indicateRequired="true" />
+
+						<p:inputText 
+							value="#{manterPessoaBB.genero}"
+							disabled="#{manterPessoaBB.ehAlteracaoPerfil}"
+							id="genero" 
+							required="true" 
+							maxlength="15"
+							styleClass="form-control" 
+						>
+						</p:inputText>							
+					</div>
+					
+					<!-- Campo: dtNascimentp -->
+					<div class="form-group col-md-6">
+						<p:outputLabel for="dtNascimento" value="Nome" indicateRequired="false" />
+
+						<p:inputText 
+							value="#{manterPessoaBB.dtNascimento}"
+							disabled="#{manterPessoaBB.ehAlteracaoPerfil}"
+							id="dtNascimento" 
+							required="false" 
+							maxlength="150"
+							styleClass="form-control" 
+						/>							
+					</div>
+										
+					<!-- Botões de ação -->
+					<div 
+						class="box-footer align-center with-border" 
+						jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado and !manterUsuarioBB.ehAlteracaoPerfil}">
+											
+						<p:commandButton 
+							value="Incluir" 
+							title="Incluir Pessoa"
+							actionListener="#{manterPessoaBB.incluir()}" 
+							styleClass="btn btn-primary" 
+						/>
+					</div>					
+					<div 
+						class="box-footer align-center with-border" 
+						jsf:rendered="#{autenticadorBB.ehAdministradorUsuarioLogado and manterUsuarioBB.ehAlteracaoPerfil}">
+											
+						<p:commandButton 
+							value="Alterar" 
+							title="Salvar Alteração de Perfil"
+							actionListener="#{manterPessoaBB.salvarAlteracaoPerfil()}" 
+							styleClass="btn btn-primary" 
+						/>
+					</div>				
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</ui:component>
